@@ -1,36 +1,25 @@
-# Sample workflow for building and deploying a Hugo site to GitHub Pages
 name: Deploy Hugo site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Environment variables available to all jobs and steps in this workflow
 env:
   HUGO_ENV: production
   HUGO_VERSION: "0.134.3"
   GO_VERSION: "1.22.2"
   NODE_VERSION: "20.0.0"
-  TINA_CLIENT_ID: ${{ vars.TINA_CLIENT_ID }}
-  TINA_TOKEN: ${{ vars.TINA_TOKEN }}
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install Hugo
         run: |
@@ -48,22 +37,14 @@ jobs:
           rm go${{ env.GO_VERSION }}.linux-amd64.tar.gz
           go version
 
-      - name: Setup Project
-        run: npm run project-setup
-
-      - name: Install npm dependencies
-        run: npm install
-
-      - name: Publish to GitHub Pages
-        run: npm run build
+      - name: Build Hugo site
+        run: hugo --gc --minify --baseURL "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v1
         with:
-          branch: master
           path: ./public
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
