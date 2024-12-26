@@ -106,7 +106,7 @@
   @apply cs-scrollbar max-h-[100vh] max-lg:fixed max-lg:-left-full lg:overflow-auto;
 
   &.active {
-    @apply border-r-border xs:max-w-[400px] left-0 top-0 z-40 h-full w-full max-w-[270px] overflow-auto border-r bg-white px-4 pt-4 lg:border-r-0;
+    @apply border-r-border h-full w-full max-w-[270px] xs:max-w-[400px] left-0 top-0 z-40  overflow-auto border-r bg-white px-4 pt-4 lg:border-r-0;
   }
 }
 

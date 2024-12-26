@@ -14,7 +14,7 @@
           max-w-[320px] lg:pr-0 lg:max-w-[380px] 2xl:max-w-[400px]
         {{ end }}">
         <aside
-          class="sidebar overflow-auto lg:!sticky lg:!top-[95px] lg:max-h-[calc(100vh-100px)] lg:!w-full lg:!py-10 lg:!pr-[46px]">
+          class="sidebar overflow-auto lg:!sticky lg:!top-[95px] lg:max-h-[calc(100vh-100px)] lg:!py-10 lg:!pr-[46px]  max-w-[270px] sm:max-w-[400px] lg:!w-full">
           <form
             class="border-border mb-10 hidden w-full justify-between rounded-xl border sm:rounded-2xl lg:flex">
             <input
@@ -166,7 +166,7 @@
           {{ .Title }}
         </button>
       {{ else }}
-        <a href="{{ .Permalink }}" data-accordion>
+        <a class="break-words" href="{{ .Permalink }}" data-accordion>
           {{ .Title }}
         </a>
       {{ end }}
